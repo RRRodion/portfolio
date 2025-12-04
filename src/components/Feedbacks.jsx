@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useLang } from "../context/LanguageContext.jsx";
 
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
@@ -25,22 +26,24 @@ const FeedbackCard = ({ index, company, image }) => (
 );
 
 const Feedbacks = () => {
+    const { t } = useLang();
+
     return (
         <div className="mt-12 bg-black-100 rounded-[20px]">
             {/* Header section */}
             <div className="bg-tertiary rounded-2xl min-h-[100px] flex flex-col items-center justify-center py-6">
                 <motion.div variants={textVariant()}>
-                    <p className="text-secondary text-sm">What others say</p>
+                    <p className="text-secondary text-sm">{t("feedbacks.subtitle")}</p>
                     <h2 className="text-white text-2xl font-bold text-center">
-                        Testimonials.
+                        {t("feedbacks.title")}
                     </h2>
                 </motion.div>
             </div>
 
-            {/* Cards section */}
             <div className="mt-8 pb-14 px-4 flex flex-wrap gap-7 justify-center">
                 {testimonials.map((testimonial, index) => (
                     <FeedbackCard
+                        key={index}
                         index={index}
                         company={testimonial.company}
                         image={testimonial.image}
@@ -52,3 +55,4 @@ const Feedbacks = () => {
 };
 
 export default SectionWrapper(Feedbacks, "");
+
